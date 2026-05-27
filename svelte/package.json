@@ -1,0 +1,49 @@
+{
+  "name": "@miosa/svelte",
+  "version": "0.3.0",
+  "description": "Svelte 5 components for MIOSA sandbox infrastructure",
+  "license": "MIT",
+  "author": "MIOSA <hello@miosa.ai>",
+  "homepage": "https://miosa.ai",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0 || ^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "xterm": {
+      "optional": true
+    },
+    "monaco-editor": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@miosa/sdk": "^1.0.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@testing-library/svelte": "^5.0.0",
+    "jsdom": "^24.0.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^3.8.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.6.0"
+  }
+}
