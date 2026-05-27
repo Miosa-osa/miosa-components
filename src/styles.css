@@ -1,0 +1,323 @@
+/* @miosa/react — base styles
+   Import once in your app: import "@miosa/react/styles.css"
+   Override via CSS custom properties or the `unstyled` prop pattern.
+   Container queries used for responsive layout; no Tailwind dependency.
+*/
+
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  --miosa-font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --miosa-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --miosa-radius: 6px;
+  --miosa-transition: 150ms ease;
+}
+
+/* dark theme tokens */
+[data-miosa-theme="dark"] {
+  --miosa-bg: #0d0d0d;
+  --miosa-bg-surface: #161616;
+  --miosa-bg-hover: #1f1f1f;
+  --miosa-border: #2a2a2a;
+  --miosa-text: #f0f0f0;
+  --miosa-text-muted: #888;
+  --miosa-accent: #4f8ef7;
+  --miosa-accent-hover: #6aa0ff;
+  --miosa-error: #f87171;
+  --miosa-success: #34d399;
+  --miosa-bar-fill: #4f8ef7;
+}
+
+/* light theme tokens */
+[data-miosa-theme="light"] {
+  --miosa-bg: #ffffff;
+  --miosa-bg-surface: #f5f5f5;
+  --miosa-bg-hover: #ebebeb;
+  --miosa-border: #d4d4d4;
+  --miosa-text: #1a1a1a;
+  --miosa-text-muted: #666;
+  --miosa-accent: #2563eb;
+  --miosa-accent-hover: #1d4ed8;
+  --miosa-error: #dc2626;
+  --miosa-success: #16a34a;
+  --miosa-bar-fill: #2563eb;
+}
+
+/* ─── MiosaPreview ──────────────────────────────────────────────────────── */
+.miosa-preview {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: var(--miosa-bg);
+  border: 1px solid var(--miosa-border);
+  border-radius: var(--miosa-radius);
+  overflow: hidden;
+}
+
+.miosa-preview__frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.miosa-preview__skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--miosa-bg-surface) 25%,
+    var(--miosa-bg-hover) 50%,
+    var(--miosa-bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: miosa-shimmer 1.4s infinite;
+}
+
+.miosa-preview--error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.miosa-preview__error-text {
+  color: var(--miosa-error);
+  font-family: var(--miosa-font-sans);
+  font-size: 0.875rem;
+}
+
+/* ─── MiosaTerminal ─────────────────────────────────────────────────────── */
+.miosa-terminal {
+  container-type: inline-size;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  background: var(--miosa-bg);
+  border: 1px solid var(--miosa-border);
+  border-radius: var(--miosa-radius);
+  overflow: hidden;
+  font-family: var(--miosa-font-mono);
+}
+
+/* xterm.js mounts its canvas inside this div */
+.miosa-terminal .xterm {
+  height: 100%;
+  padding: 8px;
+}
+
+/* ─── MiosaFileTree ─────────────────────────────────────────────────────── */
+.miosa-file-tree {
+  container-type: inline-size;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--miosa-bg);
+  border: 1px solid var(--miosa-border);
+  border-radius: var(--miosa-radius);
+  font-family: var(--miosa-font-sans);
+  font-size: 0.8125rem;
+  color: var(--miosa-text);
+}
+
+.miosa-file-tree__root,
+.miosa-file-tree__children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.miosa-file-tree__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--miosa-text);
+  font-size: inherit;
+  font-family: inherit;
+  text-align: left;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  transition: background var(--miosa-transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.miosa-file-tree__row:hover {
+  background: var(--miosa-bg-hover);
+}
+
+.miosa-file-tree__icon {
+  color: var(--miosa-text-muted);
+  flex-shrink: 0;
+  width: 12px;
+  text-align: center;
+}
+
+.miosa-file-tree__skeleton {
+  height: 120px;
+  background: linear-gradient(
+    90deg,
+    var(--miosa-bg-surface) 25%,
+    var(--miosa-bg-hover) 50%,
+    var(--miosa-bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: miosa-shimmer 1.4s infinite;
+}
+
+.miosa-file-tree__error-text {
+  color: var(--miosa-error);
+  padding: 0.5rem;
+  display: block;
+  font-size: 0.8125rem;
+}
+
+/* ─── MiosaCodeEditor ───────────────────────────────────────────────────── */
+.miosa-code-editor {
+  container-type: inline-size;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: var(--miosa-bg);
+  border: 1px solid var(--miosa-border);
+  border-radius: var(--miosa-radius);
+  overflow: hidden;
+}
+
+.miosa-code-editor__loading {
+  width: 100%;
+  height: 100%;
+  background: var(--miosa-bg-surface);
+}
+
+.miosa-code-editor__error {
+  padding: 1rem;
+  color: var(--miosa-error);
+}
+
+.miosa-code-editor__error-text {
+  font-family: var(--miosa-font-mono);
+  font-size: 0.8125rem;
+  white-space: pre-wrap;
+}
+
+/* ─── MiosaUsage ────────────────────────────────────────────────────────── */
+.miosa-usage {
+  container-type: inline-size;
+  width: 100%;
+  background: var(--miosa-bg);
+  border: 1px solid var(--miosa-border);
+  border-radius: var(--miosa-radius);
+  padding: 1rem;
+  font-family: var(--miosa-font-sans);
+  color: var(--miosa-text);
+}
+
+.miosa-usage__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.miosa-usage__total {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.miosa-usage__period {
+  font-size: 0.75rem;
+  color: var(--miosa-text-muted);
+}
+
+.miosa-usage__chart {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.miosa-usage__bar {
+  fill: var(--miosa-bar-fill);
+  opacity: 0.85;
+  transition: opacity var(--miosa-transition);
+}
+
+.miosa-usage__bar:hover {
+  opacity: 1;
+}
+
+.miosa-usage__skeleton {
+  height: 80px;
+  background: linear-gradient(
+    90deg,
+    var(--miosa-bg-surface) 25%,
+    var(--miosa-bg-hover) 50%,
+    var(--miosa-bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: miosa-shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+
+/* ─── MiosaShareButton ──────────────────────────────────────────────────── */
+.miosa-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  background: var(--miosa-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--miosa-radius);
+  font-family: var(--miosa-font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--miosa-transition), opacity var(--miosa-transition);
+  white-space: nowrap;
+}
+
+.miosa-share-btn:hover:not(:disabled) {
+  background: var(--miosa-accent-hover);
+}
+
+.miosa-share-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.miosa-share-btn--copied {
+  background: var(--miosa-success);
+}
+
+.miosa-share-btn--error {
+  background: var(--miosa-error);
+}
+
+.miosa-share-btn__icon {
+  font-size: 0.9em;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes miosa-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Container query breakpoints ────────────────────────────────────────── */
+@container (max-width: 480px) {
+  .miosa-usage__header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .miosa-file-tree {
+    font-size: 0.75rem;
+  }
+}
